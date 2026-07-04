@@ -1,292 +1,793 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PTN Phóng Xạ - Sinh Tồn Ký</title>
-    <style>
-        /* CSS RESET & GENERAL STYLE */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #e0f2f1; color: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        
-        /* CONTAINER CHÍNH MÔ PHỎNG MÀN HÌNH MÁY CHIẾU (DISPLAY MODE) */
-        #game-container { width: 100%; max-width: 1024px; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 30px; position: relative; text-align: center; border: 4px solid #fff; transition: all 0.5s ease; }
-        .fail-bg { background-color: #ffebee !important; border-color: #ef5350 !important; animation: shake 0.5s; }
-        .success-bg { background-color: #e8f5e9 !important; border-color: #66bb6a !important; }
+You are a Senior Full Stack Web Developer, UI/UX Designer, Game Developer and Frontend Engineer with over 15 years of experience.
 
-        /* TIÊU ĐỀ & TRẠNG THÁI */
-        h1 { color: #00796b; font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        #scene-title { font-weight: bold; color: #f57c00; font-size: 1.2rem; margin-bottom: 20px; }
-        #story-text { font-size: 1.5rem; line-height: 1.6; margin: 20px auto; max-width: 800px; min-height: 80px; font-weight: 600; }
+Your task is to generate an ENTIRE production-ready web game project.
 
-        /* KHU VỰC PHÒNG THÍ NGHIỆM & NHÂN VẬT ANTS */
-        #lab-stage { width: 100%; height: 350px; background: linear-gradient(to bottom, #eceff1, #cfd8dc); border-radius: 15px; position: relative; margin-bottom: 25px; overflow: hidden; border: 3px solid #b0bec5; }
-        
-        /* Chi tiết PTN phục vụ SRS */
-        .prop { position: absolute; background: #90a4ae; border-radius: 4px; color: white; font-size: 11px; padding: 5px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-        .prop-fridge { width: 70px; height: 160px; left: 40px; bottom: 40px; background: #b0bec5; border: 2px solid #78909c; }
-        .prop-hazard { width: 50px; height: 50px; top: 20px; right: 40px; background: #fbc02d; border-radius: 50%; border: 3px solid #333; color: #333; font-size: 24px; justify-content: center; }
-        .prop-bin { width: 60px; height: 80px; right: 50px; bottom: 40px; background: #e53935; border-radius: 5px 5px 0 0; }
-        .prop-table { width: 60%; height: 40px; left: 20%; bottom: 40px; background: #78909c; border-radius: 5px; z-index: 2; }
-        
-        /* HIỆU ỨNG TRÀN CHẤT LỎNG (SCENE 3) */
-        #spill-effect { position: absolute; width: 120px; height: 20px; background: #00e676; bottom: 80px; left: 45%; border-radius: 50%; opacity: 0; z-index: 3; }
-        .spill-active { opacity: 1 !important; transform: scale(1.5); transition: all 1s ease; }
+DO NOT explain anything.
 
-        /* AVATAR NHÂN VẬT (MÔ PHỎNG HOẠT HÌNH) */
-        #character { width: 100px; height: 180px; position: absolute; bottom: 75px; left: 45%; z-index: 5; transition: all 0.5s ease; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-        
-        /* Các bộ phận vẽ bằng CSS để dễ chạy động */
-        .char-head { width: 50px; height: 50px; background: #ffccbc; border-radius: 50%; position: relative; transition: all 0.3s; }
-        .char-body { width: 60px; height: 90px; background: #ff5722; border-radius: 10px 10px 0 0; position: relative; transition: all 0.3s; margin-top: -5px; display: flex; justify-content: center; }
-        .char-feet { width: 100%; display: flex; justify-content: space-around; }
-        .foot { width: 20px; height: 15px; background: #795548; border-radius: 5px 5px 0 0; }
-        .item-hand { position: absolute; width: 25px; height: 40px; background: #ffcc80; right: -20px; top: 10px; border-radius: 5px; font-size: 12px; text-align: center; line-height: 1.2; display: none; }
+DO NOT summarize.
 
-        /* ANIMATION TRẠNG THÁI (SRS CHƯƠNG 6) */
-        /* IDLE */
-        .status-idle { animation: bounce 1.5s infinite alternate; }
-        /* SUCCESS */
-        .status-success .char-body { background: #ffffff !important; border: 2px solid #00796b; box-shadow: inset 0 20px 0 #00796b; }
-        .status-success .foot { background: #333 !important; border-radius: 5px; }
-        .status-success { animation: jump 0.6s infinite alternate; }
-        /* FAIL */
-        .status-fail .char-head { background: #555 !important; border-radius: 4px; }
-        .status-fail .char-body { background: #333 !important; animation: smoke 0.3s infinite; }
-        .status-fail { animation: shake 0.2s infinite; }
+DO NOT omit files.
 
-        /* MÔ PHỎNG CONTROLLER MODE (BẤM TRÊN ĐIỆN THOẠI) */
-        #controller-box { width: 100%; margin-top: 20px; background: #f5f5f5; border-radius: 15px; padding: 20px; border: 2px dashed #b2dfdb; }
-        #controller-title { font-size: 1rem; color: #757575; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; }
-        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .btn-choice { background: #009688; color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; transition: all 0.2s; min-width: 150px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-choice:hover { background: #00796b; transform: translateY(-2px); }
-        .btn-choice:active { transform: translateY(1px); }
+Generate ALL source code.
 
-        /* ĐỒNG HỒ ĐẾM NGƯỢC & THÔNG BÁO VOTE */
-        #timer { font-size: 2.5rem; font-weight: bold; color: #e53935; margin: 15px 0; display: none; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
-        #vote-result { margin-top: 15px; font-size: 1.2rem; font-weight: bold; color: #00796b; display: none; }
+The output must be a complete project that can immediately run after adding Firebase configuration.
 
-        /* KHUNG CHỨA HỆ THỐNG ĐIỀU KHIỂN CỦA HOST (SRS CHƯƠNG 4) */
-        #host-panel { margin-top: 25px; padding-top: 15px; border-top: 2px solid #cfd8dc; display: flex; justify-content: center; gap: 10px; }
-        .btn-host { background: #607d8b; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
-        .btn-host:hover { background: #455a64; }
+========================================================
+PROJECT INFORMATION
+========================================================
 
-        /* ĐỊNH NGHĨA KEYFRAMES ANIMATION */
-        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
-        @keyframes jump { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-30px) scale(0.9); } }
-        @keyframes shake { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 50% { transform: translate(1px, -1px) rotate(1deg); } 100% { transform: translate(2px, 1px) rotate(0deg); } }
-        @keyframes smoke { 0% { box-shadow: 0 0 0 rgba(0,0,0,0); } 50% { box-shadow: 0 -10px 20px #555; } 100% { box-shadow: 0 0 0 rgba(0,0,0,0); } }
-    </style>
-</head>
-<body>
+Project Name
 
-    <div id="game-container">
-        <h1>PTN PHÓNG XẠ – SINH TỒN KÝ</h1>
-        <div id="scene-title">MÀN HÌNH CHỜ (HOST SCREEN)</div>
-        
-        <div id="lab-stage">
-            <div class="prop prop-fridge">TỦ LẠNH</div>
-            <div class="prop prop-hazard">☢</div>
-            <div class="prop prop-table">BÀN THÍ NGHIỆM</div>
-            <div class="prop prop-bin">RÁC PX</div>
-            <div id="spill-effect"></div>
-            
-            <div id="character" class="status-idle">
-                <div class="char-head">
-                    <div style="position:absolute; width:6px; height:6px; background:#333; border-radius:50%; top:20px; left:12px;"></div>
-                    <div style="position:absolute; width:6px; height:6px; background:#333; border-radius:50%; top:20px; right:12px;"></div>
-                </div>
-                <div class="char-body">
-                    <div id="hand-item" class="item-hand">🧋</div>
-                </div>
-                <div class="char-feet">
-                    <div class="foot"></div>
-                    <div class="foot"></div>
-                </div>
-            </div>
-        </div>
+PTN PHÓNG XẠ – SINH TỒN KÝ
 
-        <div id="story-text">Quét mã QR Code hoặc nhấn nút [START] bên dưới hệ thống điều khiển của Host để bắt đầu màn thực tập sinh tồn!</div>
-        
-        <div id="timer">10</div>
-        <div id="vote-result">Đang tổng hợp phiếu bầu từ các thiết bị...</div>
+Type
 
-        <div id="controller-box">
-            <div id="controller-title">📱 GIAO DIỆN TƯƠNG TÁC TRÊN ĐIỆN THOẠI HỌC SINH (CONTROLLER)</div>
-            <div class="btn-group" id="choices-wrapper">
-                <button class="btn-choice" onclick="selectChoice('A')">A</button>
-                <button class="btn-choice" onclick="selectChoice('B')">B</button>
-            </div>
-        </div>
+Interactive Story Game
 
-        <div id="host-panel">
-            <button class="btn-host" onclick="startGame()">▶ START GAME</button>
-            <button class="btn-host" onclick="nextScene()">NEXT SCENE ➔</button>
-            <button class="btn-host" onclick="resetGame()">🔄 RESTART</button>
-        </div>
-    </div>
+Platform
 
-    <script>
-        // QUẢN LÝ TRẠNG THÁI GAME THEO SRS
-        let currentScene = 0;
-        let countdown;
-        
-        const character = document.getElementById('character');
-        const handItem = document.getElementById('hand-item');
-        const storyText = document.getElementById('story-text');
-        const sceneTitle = document.getElementById('scene-title');
-        const container = document.getElementById('game-container');
-        const timerDisplay = document.getElementById('timer');
-        const voteResult = document.getElementById('vote-result');
-        const choicesWrapper = document.getElementById('choices-wrapper');
+Web
 
-        // DANH SÁCH DỮ LIỆU KỊCH BẢN CHƯƠNG 9
-        const scriptData = {
-            1: {
-                title: "SCENE 1: CỬA PHÒNG THÍ NGHIỆM",
-                text: "Bạn chuẩn bị bước vào PTN phóng xạ. Trên tay đang cầm ly trà sữa, mặc quần lửng, dép lê. Bạn sẽ làm gì?",
-                choices: [
-                    { key: 'A', text: 'A: Cứ đi vào luôn, không sao đâu!' },
-                    { key: 'B', text: 'B: Thay đồ bảo hộ, cất trà sữa.' }
-                ]
-            },
-            2: {
-                title: "SCENE 2: THAO TÁC VỚI MẪU PHÓNG XẠ HỞ",
-                text: "Giảng viên giao cho bạn một lọ chứa đồng vị phóng xạ hở. Tuy nhiên, ngón tay bạn đang có một vết xước nhẹ đã băng Urgo. Bạn xử lý sao?",
-                choices: [
-                    { key: 'A', text: 'A: Đeo găng tay đè lên vết thương rồi làm.' },
-                    { key: 'B', text: 'B: Báo ngay với GV để xin đổi việc.' }
-                ]
-            },
-            3: {
-                title: "SCENE 3: XOẢNG!!! SỰ CỐ ĐỔ TRÀN",
-                text: "Bạn vô tình trượt tay làm đổ một lọ dung dịch chứa chất phóng xạ ra bàn thí nghiệm! Hành động đầu tiên của bạn là gì?",
-                choices: [
-                    { key: 'A', text: 'A: Lấy khăn giấy lau thật nhanh.' },
-                    { key: 'B', text: 'B: Sợ quá, bỏ chạy ra ngoài.' },
-                    { key: 'C', text: 'C: Hô to cảnh báo mọi người né xa.' }
-                ]
-            }
-        };
+Language
 
-        function startGame() {
-            currentScene = 1;
-            loadScene(currentScene);
-        }
+HTML5
 
-        function loadScene(sceneId) {
-            container.className = ""; 
-            document.getElementById('spill-effect').classList.remove('spill-active');
-            voteResult.style.display = "none";
-            
-            character.className = "status-idle";
-            
-            if(sceneId === 1) {
-                handItem.style.display = "block"; 
-                character.style.left = "15%"; 
-            } else if(sceneId === 2) {
-                handItem.style.display = "none";
-                character.style.left = "45%";
-            } else if(sceneId === 3) {
-                character.style.left = "45%";
-            }
+CSS3
 
-            const data = scriptData[sceneId];
-            sceneTitle.innerText = data.title;
-            storyText.innerText = data.text;
+Vanilla JavaScript ES6
 
-            // Đổi nút bấm mô phỏng trên điện thoại học sinh
-            choicesWrapper.innerHTML = "";
-            data.choices.forEach(c => {
-                choicesWrapper.innerHTML += `<button class="btn-choice" onclick="handleVote('${c.key}')">${c.text}</button>`;
-            });
+Realtime Database
 
-            startTimer();
-        }
+Firebase Realtime Database
 
-        function startTimer() {
-            let count = 10;
-            timerDisplay.style.display = "block";
-            timerDisplay.innerText = count;
-            clearInterval(countdown);
-            
-            countdown = setInterval(() => {
-                count--;
-                timerDisplay.innerText = count;
-                if(count <= 0) {
-                    clearInterval(countdown);
-                    timerDisplay.style.display = "none";
-                }
-            }, 1000);
-        }
+Hosting
 
-        // MÔ PHỎNG XỬ LÝ KẾT QUẢ VOTE (CHẠY ANIMATION THEO SRS CHƯƠNG 9)
-        function handleVote(choice) {
-            clearInterval(countdown);
-            timerDisplay.style.display = "none";
-            voteResult.style.display = "block";
-            voteResult.innerText = `Đã khóa vote! Phương án [${choice}] chiếm đa số (100% người chọn).`;
+GitHub Pages
 
-            if (currentScene === 1) {
-                if (choice === 'A') {
-                    container.classList.add('fail-bg');
-                    character.className = "status-fail";
-                    storyText.innerHTML = "❌ GAME OVER!<br>Bạn bị nhiễm xạ qua đường ăn uống và bị đuổi ngay từ vòng gửi xe.";
-                } else {
-                    container.classList.add('success-bg');
-                    character.className = "status-success";
-                    handItem.style.display = "none";
-                    storyText.innerHTML = "✓ CHÍNH XÁC!<br>Avatar đổi skin: Mặc áo Blouse dài tay, đi giày bảo hộ kín mũi chuẩn PTN.";
-                }
-            } 
-            else if (currentScene === 2) {
-                if (choice === 'A') {
-                    container.classList.add('fail-bg');
-                    character.className = "status-fail";
-                    storyText.innerHTML = "❌ HẬU QUẢ NGHIÊM TRỌNG!<br>Chất phóng xạ ngấm qua lỗ hở cực nhỏ của găng tay vào vết thương. Bạn phải đi cấp cứu khẩn cấp!";
-                } else {
-                    container.classList.add('success-bg');
-                    character.className = "status-success";
-                    storyText.innerHTML = "✓ CHUẨN XÁC!<br>Văn hóa an toàn tốt. Không tiếp xúc với nguồn hở khi có vết thương để phòng nhiễm chiếu xạ nội.";
-                }
-            } 
-            else if (currentScene === 3) {
-                if (choice === 'A' || choice === 'B') {
-                    container.classList.add('fail-bg');
-                    character.className = "status-fail";
-                    document.getElementById('spill-effect').classList.add('spill-active');
-                    storyText.innerHTML = "❌ THẤT BẠI!<br>Hành động này làm lan rộng ô nhiễm phóng xạ ra môi trường và gây hại cho người khác. GAME OVER!";
-                } else {
-                    container.classList.add('success-bg');
-                    character.className = "status-success";
-                    document.getElementById('spill-effect').classList.add('spill-active');
-                    storyText.innerHTML = "🎉 CHÚC MỪNG!<br>Bạn áp dụng đúng quy trình ứng phó sự cố: Báo động ➔ Dùng giấy thấm chuyên dụng cô lập nguồn ➔ Thu gom vào thùng rác phóng xạ. BẠN ĐÃ SỐNG SÓT XUẤT SẮC!";
-                }
-            }
-        }
+or
 
-        function nextScene() {
-            if(currentScene < 3 && currentScene > 0) {
-                currentScene++;
-                loadScene(currentScene);
-            }
-        }
+Vercel
 
-        function resetGame() {
-            currentScene = 0;
-            clearInterval(countdown);
-            container.className = "";
-            timerDisplay.style.display = "none";
-            voteResult.style.display = "none";
-            handItem.style.display = "none";
-            document.getElementById('spill-effect').classList.remove('spill-active');
-            character.className = "status-idle";
-            character.style.left = "45%";
-            sceneTitle.innerText = "MÀN HÌNH CHỜ (HOST SCREEN)";
-            storyText.innerText = "Quét mã QR Code hoặc nhấn nút [START] bên dưới hệ thống điều khiển của Host để bắt đầu màn thực tập sinh tồn!";
-            choicesWrapper.innerHTML = `<button class="btn-choice" onclick="startGame()">A</button><button class="btn-choice" onclick="startGame()">B</button>`;
-        }
-    </script>
-</body>
-</html>
+========================================================
+PROJECT GOAL
+========================================================
+
+This is an educational multiplayer game.
+
+One computer connects to a projector.
+
+Many students join using smartphones.
+
+The projector only displays the story.
+
+Phones become game controllers.
+
+Students vote in real time.
+
+The option with the highest percentage automatically determines the next scene.
+
+========================================================
+PAGES
+========================================================
+
+Generate these pages
+
+index.html
+
+display.html
+
+controller.html
+
+host.html
+
+========================================================
+PROJECT STRUCTURE
+========================================================
+
+PTN-Phong-Xa/
+
+index.html
+
+display.html
+
+controller.html
+
+host.html
+
+/css
+
+style.css
+
+display.css
+
+controller.css
+
+host.css
+
+/js
+
+firebase.js
+
+app.js
+
+display.js
+
+controller.js
+
+host.js
+
+game.js
+
+animations.js
+
+vote.js
+
+/assets
+
+/backgrounds
+
+/characters
+
+/effects
+
+/icons
+
+/sounds
+
+README.md
+
+package.json
+
+========================================================
+DESIGN STYLE
+========================================================
+
+Modern
+
+Flat Cartoon
+
+Cute
+
+Educational
+
+Bright
+
+Friendly
+
+Suitable for students
+
+Color palette
+
+Blue
+
+White
+
+Yellow
+
+Orange
+
+Rounded cards
+
+Soft shadow
+
+Large buttons
+
+Large fonts
+
+Smooth animation
+
+========================================================
+DISPLAY PAGE
+========================================================
+
+Display page contains
+
+Laboratory background
+
+Animated student
+
+Story text
+
+Countdown timer
+
+Vote percentage
+
+Scene animation
+
+Transition animation
+
+Confetti
+
+Explosion
+
+Smoke
+
+No answer buttons
+
+Fullscreen friendly
+
+16:9
+
+1920x1080
+
+========================================================
+CONTROLLER PAGE
+========================================================
+
+Phone only.
+
+Display
+
+Question
+
+Large Answer Buttons
+
+A
+
+B
+
+C
+
+Countdown
+
+Connection status
+
+After user votes
+
+Disable buttons
+
+Show
+
+Waiting for everyone...
+
+========================================================
+HOST PAGE
+========================================================
+
+Generate host dashboard
+
+Buttons
+
+Start Game
+
+Next Scene
+
+Previous Scene
+
+Restart
+
+Reset Vote
+
+Fullscreen
+
+Mute
+
+Auto Play
+
+Manual Play
+
+Show Connected Players
+
+========================================================
+INDEX PAGE
+========================================================
+
+Landing page
+
+Game Logo
+
+Description
+
+QR Code
+
+Number of connected players
+
+Start waiting animation
+
+========================================================
+PLAYER CONNECTION
+========================================================
+
+Generate unique player ID
+
+Save into LocalStorage
+
+Prevent duplicate voting
+
+Realtime player count
+
+Realtime vote count
+
+========================================================
+GAME FLOW
+========================================================
+
+Waiting Room
+
+↓
+
+Players Scan QR
+
+↓
+
+Connected
+
+↓
+
+Host Press Start
+
+↓
+
+Scene 1
+
+↓
+
+Vote
+
+↓
+
+Animation
+
+↓
+
+Scene 2
+
+↓
+
+Vote
+
+↓
+
+Animation
+
+↓
+
+Scene 3
+
+↓
+
+Vote
+
+↓
+
+Ending
+
+========================================================
+SCENE 1
+========================================================
+
+Background
+
+Laboratory entrance
+
+Radiation warning sign
+
+Student
+
+Holding milk tea
+
+Short pants
+
+Sandals
+
+Question
+
+"You are about to enter the radiation laboratory.
+
+What will you do?"
+
+Controller
+
+A
+
+Walk in immediately.
+
+B
+
+Store the drink.
+
+Wear long pants.
+
+Closed shoes.
+
+Lab coat.
+
+If majority chooses A
+
+Fail Animation
+
+Student turns black
+
+Smoke
+
+Explosion
+
+Text
+
+GAME OVER
+
+You contaminated yourself through food and drink.
+
+Restart button
+
+If majority chooses B
+
+Success Animation
+
+Student changes clothes
+
+Lab coat
+
+Long pants
+
+Closed shoes
+
+Victory sound
+
+Host presses Next
+
+========================================================
+SCENE 2
+========================================================
+
+Background
+
+Laboratory table
+
+Student
+
+Lab coat
+
+Finger covered with bandage
+
+Question
+
+"The lecturer gives you an open radioactive solution.
+
+What will you do?"
+
+Controller
+
+A
+
+Wear gloves and continue.
+
+B
+
+Report to lecturer because of open wound.
+
+If A
+
+Fail
+
+Finger glows green
+
+Alarm sound
+
+Text
+
+Radioactive material entered through your wound.
+
+Emergency required.
+
+If B
+
+Success
+
+Student nods
+
+Next
+
+========================================================
+SCENE 3
+========================================================
+
+Background
+
+Laboratory
+
+Bottle falls
+
+Radioactive liquid spills
+
+Question
+
+"The radioactive solution spills.
+
+What is your FIRST action?"
+
+Controller
+
+A
+
+Wipe using tissue.
+
+B
+
+Run away.
+
+C
+
+Warn everyone nearby.
+
+If A
+
+Fail
+
+If B
+
+Fail
+
+Animation
+
+Contamination spreads
+
+Smoke
+
+Warning
+
+Text
+
+You spread radioactive contamination.
+
+GAME OVER
+
+If C
+
+Success
+
+Student grabs speaker
+
+Warns everyone
+
+Show cleanup steps
+
+Special absorbent paper
+
+Collect waste
+
+Radioactive waste bin
+
+Ending
+
+CONGRATULATIONS
+
+YOU SURVIVED
+
+Confetti
+
+Victory Music
+
+========================================================
+REALTIME SYSTEM
+========================================================
+
+Firebase Realtime Database
+
+Generate
+
+players
+
+votes
+
+currentScene
+
+gameState
+
+timer
+
+connectedUsers
+
+Automatically sync
+
+Vote percentages
+
+Current scene
+
+Countdown
+
+Player count
+
+========================================================
+COUNTDOWN
+========================================================
+
+Every question
+
+10 seconds
+
+Animated circle timer
+
+Large number
+
+After timeout
+
+Lock voting
+
+Automatically calculate winner
+
+========================================================
+ANIMATIONS
+========================================================
+
+Generate CSS animations
+
+Idle breathing
+
+Blink
+
+Wave
+
+Jump
+
+Victory
+
+Explosion
+
+Smoke
+
+Glow
+
+Fade
+
+Slide
+
+Scale
+
+Confetti
+
+Camera shake
+
+========================================================
+SOUNDS
+========================================================
+
+Success
+
+Victory
+
+Countdown
+
+Tick
+
+Explosion
+
+Alarm
+
+Ending Music
+
+Mute supported
+
+========================================================
+RESPONSIVE
+========================================================
+
+Desktop
+
+Laptop
+
+Tablet
+
+Android
+
+iPhone
+
+========================================================
+CODE QUALITY
+========================================================
+
+Write clean code.
+
+Use ES6 modules.
+
+Separate concerns.
+
+Comment important code.
+
+No duplicated code.
+
+Reusable components.
+
+Readable variables.
+
+========================================================
+README
+========================================================
+
+Generate README including
+
+Installation
+
+Firebase configuration
+
+Deploy to GitHub Pages
+
+Deploy to Vercel
+
+Project structure
+
+========================================================
+PACKAGE
+========================================================
+
+Generate package.json
+
+Include scripts
+
+npm install
+
+npm run dev
+
+========================================================
+BONUS FEATURES
+========================================================
+
+Generate automatically
+
+Loading Screen
+
+Animated Logo
+
+Background Music
+
+Dark Overlay
+
+Particle Effects
+
+Floating Radiation Icons
+
+Toast Notification
+
+Reconnect System
+
+Offline Detection
+
+Connection Lost Screen
+
+QR Code Generator
+
+Fullscreen Button
+
+Keyboard Shortcut
+
+Admin Password
+
+Scene Progress Bar
+
+Modern Glassmorphism Cards
+
+Animated Buttons
+
+Hover Effects
+
+Smooth Transition
+
+========================================================
+FINAL REQUIREMENTS
+========================================================
+
+Generate the COMPLETE PROJECT.
+
+Do NOT skip any file.
+
+Do NOT use placeholder code.
+
+Do NOT write "...".
+
+Do NOT omit CSS.
+
+Do NOT omit JavaScript.
+
+Do NOT omit Firebase logic.
+
+Every HTML page must be complete.
+
+Every CSS file must be complete.
+
+Every JavaScript file must be complete.
+
+The project must run immediately after Firebase configuration is added.
+
+Output ALL files one by one with clear file names.
+
+Do not stop until every file has been generated.
