@@ -1,793 +1,369 @@
-You are a Senior Full Stack Web Developer, UI/UX Designer, Game Developer and Frontend Engineer with over 15 years of experience.
-
-Your task is to generate an ENTIRE production-ready web game project.
-
-DO NOT explain anything.
-
-DO NOT summarize.
-
-DO NOT omit files.
-
-Generate ALL source code.
-
-The output must be a complete project that can immediately run after adding Firebase configuration.
-
-========================================================
-PROJECT INFORMATION
-========================================================
-
-Project Name
-
-PTN PHÓNG XẠ – SINH TỒN KÝ
-
-Type
-
-Interactive Story Game
-
-Platform
-
-Web
-
-Language
-
-HTML5
-
-CSS3
-
-Vanilla JavaScript ES6
-
-Realtime Database
-
-Firebase Realtime Database
-
-Hosting
-
-GitHub Pages
-
-or
-
-Vercel
-
-========================================================
-PROJECT GOAL
-========================================================
-
-This is an educational multiplayer game.
-
-One computer connects to a projector.
-
-Many students join using smartphones.
-
-The projector only displays the story.
-
-Phones become game controllers.
-
-Students vote in real time.
-
-The option with the highest percentage automatically determines the next scene.
-
-========================================================
-PAGES
-========================================================
-
-Generate these pages
-
-index.html
-
-display.html
-
-controller.html
-
-host.html
-
-========================================================
-PROJECT STRUCTURE
-========================================================
-
-PTN-Phong-Xa/
-
-index.html
-
-display.html
-
-controller.html
-
-host.html
-
-/css
-
-style.css
-
-display.css
-
-controller.css
-
-host.css
-
-/js
-
-firebase.js
-
-app.js
-
-display.js
-
-controller.js
-
-host.js
-
-game.js
-
-animations.js
-
-vote.js
-
-/assets
-
-/backgrounds
-
-/characters
-
-/effects
-
-/icons
-
-/sounds
-
-README.md
-
-package.json
-
-========================================================
-DESIGN STYLE
-========================================================
-
-Modern
-
-Flat Cartoon
-
-Cute
-
-Educational
-
-Bright
-
-Friendly
-
-Suitable for students
-
-Color palette
-
-Blue
-
-White
-
-Yellow
-
-Orange
-
-Rounded cards
-
-Soft shadow
-
-Large buttons
-
-Large fonts
-
-Smooth animation
-
-========================================================
-DISPLAY PAGE
-========================================================
-
-Display page contains
-
-Laboratory background
-
-Animated student
-
-Story text
-
-Countdown timer
-
-Vote percentage
-
-Scene animation
-
-Transition animation
-
-Confetti
-
-Explosion
-
-Smoke
-
-No answer buttons
-
-Fullscreen friendly
-
-16:9
-
-1920x1080
-
-========================================================
-CONTROLLER PAGE
-========================================================
-
-Phone only.
-
-Display
-
-Question
-
-Large Answer Buttons
-
-A
-
-B
-
-C
-
-Countdown
-
-Connection status
-
-After user votes
-
-Disable buttons
-
-Show
-
-Waiting for everyone...
-
-========================================================
-HOST PAGE
-========================================================
-
-Generate host dashboard
-
-Buttons
-
-Start Game
-
-Next Scene
-
-Previous Scene
-
-Restart
-
-Reset Vote
-
-Fullscreen
-
-Mute
-
-Auto Play
-
-Manual Play
-
-Show Connected Players
-
-========================================================
-INDEX PAGE
-========================================================
-
-Landing page
-
-Game Logo
-
-Description
-
-QR Code
-
-Number of connected players
-
-Start waiting animation
-
-========================================================
-PLAYER CONNECTION
-========================================================
-
-Generate unique player ID
-
-Save into LocalStorage
-
-Prevent duplicate voting
-
-Realtime player count
-
-Realtime vote count
-
-========================================================
-GAME FLOW
-========================================================
-
-Waiting Room
-
-↓
-
-Players Scan QR
-
-↓
-
-Connected
-
-↓
-
-Host Press Start
-
-↓
-
-Scene 1
-
-↓
-
-Vote
-
-↓
-
-Animation
-
-↓
-
-Scene 2
-
-↓
-
-Vote
-
-↓
-
-Animation
-
-↓
-
-Scene 3
-
-↓
-
-Vote
-
-↓
-
-Ending
-
-========================================================
-SCENE 1
-========================================================
-
-Background
-
-Laboratory entrance
-
-Radiation warning sign
-
-Student
-
-Holding milk tea
-
-Short pants
-
-Sandals
-
-Question
-
-"You are about to enter the radiation laboratory.
-
-What will you do?"
-
-Controller
-
-A
-
-Walk in immediately.
-
-B
-
-Store the drink.
-
-Wear long pants.
-
-Closed shoes.
-
-Lab coat.
-
-If majority chooses A
-
-Fail Animation
-
-Student turns black
-
-Smoke
-
-Explosion
-
-Text
-
-GAME OVER
-
-You contaminated yourself through food and drink.
-
-Restart button
-
-If majority chooses B
-
-Success Animation
-
-Student changes clothes
-
-Lab coat
-
-Long pants
-
-Closed shoes
-
-Victory sound
-
-Host presses Next
-
-========================================================
-SCENE 2
-========================================================
-
-Background
-
-Laboratory table
-
-Student
-
-Lab coat
-
-Finger covered with bandage
-
-Question
-
-"The lecturer gives you an open radioactive solution.
-
-What will you do?"
-
-Controller
-
-A
-
-Wear gloves and continue.
-
-B
-
-Report to lecturer because of open wound.
-
-If A
-
-Fail
-
-Finger glows green
-
-Alarm sound
-
-Text
-
-Radioactive material entered through your wound.
-
-Emergency required.
-
-If B
-
-Success
-
-Student nods
-
-Next
-
-========================================================
-SCENE 3
-========================================================
-
-Background
-
-Laboratory
-
-Bottle falls
-
-Radioactive liquid spills
-
-Question
-
-"The radioactive solution spills.
-
-What is your FIRST action?"
-
-Controller
-
-A
-
-Wipe using tissue.
-
-B
-
-Run away.
-
-C
-
-Warn everyone nearby.
-
-If A
-
-Fail
-
-If B
-
-Fail
-
-Animation
-
-Contamination spreads
-
-Smoke
-
-Warning
-
-Text
-
-You spread radioactive contamination.
-
-GAME OVER
-
-If C
-
-Success
-
-Student grabs speaker
-
-Warns everyone
-
-Show cleanup steps
-
-Special absorbent paper
-
-Collect waste
-
-Radioactive waste bin
-
-Ending
-
-CONGRATULATIONS
-
-YOU SURVIVED
-
-Confetti
-
-Victory Music
-
-========================================================
-REALTIME SYSTEM
-========================================================
-
-Firebase Realtime Database
-
-Generate
-
-players
-
-votes
-
-currentScene
-
-gameState
-
-timer
-
-connectedUsers
-
-Automatically sync
-
-Vote percentages
-
-Current scene
-
-Countdown
-
-Player count
-
-========================================================
-COUNTDOWN
-========================================================
-
-Every question
-
-10 seconds
-
-Animated circle timer
-
-Large number
-
-After timeout
-
-Lock voting
-
-Automatically calculate winner
-
-========================================================
-ANIMATIONS
-========================================================
-
-Generate CSS animations
-
-Idle breathing
-
-Blink
-
-Wave
-
-Jump
-
-Victory
-
-Explosion
-
-Smoke
-
-Glow
-
-Fade
-
-Slide
-
-Scale
-
-Confetti
-
-Camera shake
-
-========================================================
-SOUNDS
-========================================================
-
-Success
-
-Victory
-
-Countdown
-
-Tick
-
-Explosion
-
-Alarm
-
-Ending Music
-
-Mute supported
-
-========================================================
-RESPONSIVE
-========================================================
-
-Desktop
-
-Laptop
-
-Tablet
-
-Android
-
-iPhone
-
-========================================================
-CODE QUALITY
-========================================================
-
-Write clean code.
-
-Use ES6 modules.
-
-Separate concerns.
-
-Comment important code.
-
-No duplicated code.
-
-Reusable components.
-
-Readable variables.
-
-========================================================
-README
-========================================================
-
-Generate README including
-
-Installation
-
-Firebase configuration
-
-Deploy to GitHub Pages
-
-Deploy to Vercel
-
-Project structure
-
-========================================================
-PACKAGE
-========================================================
-
-Generate package.json
-
-Include scripts
-
-npm install
-
-npm run dev
-
-========================================================
-BONUS FEATURES
-========================================================
-
-Generate automatically
-
-Loading Screen
-
-Animated Logo
-
-Background Music
-
-Dark Overlay
-
-Particle Effects
-
-Floating Radiation Icons
-
-Toast Notification
-
-Reconnect System
-
-Offline Detection
-
-Connection Lost Screen
-
-QR Code Generator
-
-Fullscreen Button
-
-Keyboard Shortcut
-
-Admin Password
-
-Scene Progress Bar
-
-Modern Glassmorphism Cards
-
-Animated Buttons
-
-Hover Effects
-
-Smooth Transition
-
-========================================================
-FINAL REQUIREMENTS
-========================================================
-
-Generate the COMPLETE PROJECT.
-
-Do NOT skip any file.
-
-Do NOT use placeholder code.
-
-Do NOT write "...".
-
-Do NOT omit CSS.
-
-Do NOT omit JavaScript.
-
-Do NOT omit Firebase logic.
-
-Every HTML page must be complete.
-
-Every CSS file must be complete.
-
-Every JavaScript file must be complete.
-
-The project must run immediately after Firebase configuration is added.
-
-Output ALL files one by one with clear file names.
-
-Do not stop until every file has been generated.
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTN Phóng Xạ - Sinh Tồn Ký Premium</title>
+    <style>
+        /* CSS PREMIUM RESET & PALETTE */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; overflow-x: hidden; }
+        
+        /* HIỆU ỨNG KHUNG GAME BIẾN ĐỔI THEO KẾT QUẢ */
+        #game-container { width: 100%; max-width: 1000px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); padding: 30px; position: relative; text-align: center; border: 2px solid rgba(255,255,255,0.1); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fail-bg { background: rgba(239, 83, 80, 0.1) !important; border-color: #ef5350 !important; box-shadow: 0 0 40px rgba(239, 83, 80, 0.4) !important; animation: heavy-shake 0.5s; }
+        .success-bg { background: rgba(102, 187, 106, 0.1) !important; border-color: #66bb6a !important; box-shadow: 0 0 40px rgba(102, 187, 106, 0.4) !important; }
+
+        /* TYPOGRAPHY */
+        h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(45deg, #00e676, #00b0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 3px; filter: drop-shadow(0 2px 8px rgba(0,230,118,0.3)); }
+        #scene-title { font-weight: 700; color: #ffb74d; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; }
+        #story-text { font-size: 1.3rem; line-height: 1.6; margin: 15px auto; max-width: 850px; min-height: 70px; font-weight: 500; color: #e0f2f1; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+        /* KHU VỰC PHÒNG THÍ NGHIỆM ĐỒ HỌA CHÂN THẬT (LAB STAGE) */
+        #lab-stage { width: 100%; height: 380px; background: linear-gradient(180deg, #1e293b, #0f172a); border-radius: 18px; position: relative; margin-bottom: 25px; overflow: hidden; border: 3px solid #334155; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); }
+        
+        /* Các Chi tiết Trang Trí Nội Thất PTN Cao Cấp */
+        .lab-grid { position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+        .prop { position: absolute; border-radius: 6px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+        
+        .prop-fridge { width: 80px; height: 190px; left: 40px; bottom: 30px; background: linear-gradient(135deg, #64748b, #475569); border: 2px solid #94a3b8; display: flex; flex-direction: column; justify-content: space-around; padding: 10px; }
+        .fridge-line { width: 100%; height: 4px; background: #334155; }
+        
+        .prop-cabinet { width: 120px; height: 140px; right: 40px; bottom: 150px; background: rgba(71, 85, 105, 0.7); border: 2px solid #64748b; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 10px; }
+        .chem-bottle { background: #0284c7; border-radius: 3px; height: 25px; border-bottom: 3px solid #0369a1; }
+        .chem-bottle:nth-child(even) { background: #f59e0b; border-bottom: 3px solid #d97706; }
+
+        .prop-hazard { width: 55px; height: 55px; top: 20px; left: 50%; transform: translateX(-50%); background: #f59e0b; border-radius: 50%; border: 4px solid #0f172a; color: #0f172a; font-size: 28px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(245,158,11,0.5); animation: pulse 2s infinite; }
+        .prop-bin { width: 55px; height: 75px; right: 50px; bottom: 30px; background: linear-gradient(to top, #dc2626, #ef4444); border: 2px solid #fca5a5; border-radius: 6px 6px 0 0; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+        .prop-table { width: 64%; height: 35px; left: 18%; bottom: 30px; background: linear-gradient(to bottom, #cbd5e1, #94a3b8); border-top: 5px solid #f1f5f9; border-radius: 4px; z-index: 2; }
+        
+        /* HIỆU ỨNG CHẤT LỎNG / KHÓI */
+        #spill-effect { position: absolute; width: 130px; height: 15px; background: #22c55e; bottom: 65px; left: 45%; border-radius: 50%; opacity: 0; z-index: 3; box-shadow: 0 0 15px #22c55e; }
+        .spill-active { opacity: 1 !important; transform: scale(1.3); transition: all 0.8s ease; }
+        #smoke-cloud { position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.2); border-radius: 50%; bottom: 150px; left: 45%; filter: blur(10px); display: none; z-index: 6; }
+
+        /* NHÂN VẬT ĐỒ HỌA SỐNG ĐỘNG (CHARACTER) */
+        #character { width: 100px; height: 190px; position: absolute; bottom: 60px; left: 45%; z-index: 5; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+        
+        /* Chi tiết cơ thể nhân vật vẽ tỉ mỉ */
+        .char-head { width: 48px; height: 48px; background: #ffdfd3; border-radius: 50%; position: relative; border: 2px solid #334155; transition: all 0.3s; }
+        .char-hair { position: absolute; width: 100%; height: 20px; background: #2d1500; border-radius: 20px 20px 0 0; top: -2px; transition: all 0.3s; }
+        .char-eyes { position: absolute; width: 100%; display: flex; justify-content: space-around; top: 18px; padding: 0 8px; transition: all 0.3s; }
+        .eye { width: 7px; height: 7px; background: #1e293b; border-radius: 50%; }
+        .char-mouth { position: absolute; width: 12px; height: 6px; background: #e11d48; border-radius: 0 0 10px 10px; top: 30px; left: 18px; transition: all 0.3s; }
+        
+        .char-body { width: 56px; height: 85px; background: #3b82f6; border-radius: 12px 12px 0 0; border: 2px solid #334155; border-bottom: none; position: relative; transition: all 0.3s; margin-top: -2px; }
+        .char-legs { width: 44px; height: 35px; display: flex; justify-content: space-between; }
+        .leg { width: 16px; height: 100%; background: #1e3a8a; border: 2px solid #334155; border-top: none; display: flex; align-items: flex-end; transition: all 0.3s; }
+        .shoes { width: 100%; height: 10px; background: #f43f5e; border-radius: 4px 4px 0 0; transition: all 0.3s; }
+        
+        /* Tay cầm đồ vật */
+        .hand-left, .hand-right { position: absolute; width: 14px; height: 35px; background: #ffdfd3; border: 2px solid #334155; border-radius: 10px; top: 10px; transition: all 0.3s; }
+        .hand-left { left: -10px; transform-origin: top center; }
+        .hand-right { right: -10px; transform-origin: top center; }
+        .item-holder { position: absolute; bottom: -10px; left: -5px; font-size: 18px; display: none; }
+
+        /* THAY ĐỔI TRẠNG THÁI NHÂN VẬT (ANIMATIONS THEO SRS) */
+        /* Thở nhẹ khi đứng yên */
+        .status-idle { animation: idle-breath 1.4s infinite alternate ease-in-out; }
+        .status-idle .char-mouth { width: 10px; height: 2px; border-radius: 0; }
+        
+        /* Thành công: Đổi đồ Blouse, nhảy vui vẻ, giơ tay */
+        .status-success { animation: success-jump 0.5s infinite alternate ease-out; }
+        .status-success .char-body { background: #ffffff !important; box-shadow: inset 0 25px 0 #0f766e; }
+        .status-success .leg { background: #475569 !important; }
+        .status-success .shoes { background: #1e293b !important; border-radius: 5px; }
+        .status-success .char-mouth { width: 14px; height: 10px; border-radius: 0 0 14px 14px; background: #e11d48; }
+        .status-success .hand-right { transform: rotate(-140deg); }
+
+        /* Thất bại: Nổ đen thui, tóc dựng đứng, mắt xoáy */
+        .status-fail { animation: fail-shake 0.15s infinite; }
+        .status-fail .char-head { background: #475569 !important; }
+        .status-fail .char-hair { height: 30px; top: -15px; background: #1e293b !important; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+        .status-fail .char-body { background: #1e293b !important; }
+        .status-fail .leg { background: #1e293b !important; }
+        .status-fail .shoes { background: #1e293b !important; }
+        .status-fail .eye { border-radius: 0; width: 8px; height: 8px; background: transparent; border: 2px solid #fff; transform: rotate(45deg); }
+        .status-fail .char-mouth { width: 14px; height: 14px; border-radius: 50%; background: #000; top: 26px; }
+        .status-fail .hand-left { transform: rotate(40deg); }
+        .status-fail .hand-right { transform: rotate(-40deg); }
+
+        /* GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CONTROLLER BOX) */
+        #controller-box { width: 100%; margin-top: 25px; background: rgba(15, 23, 42, 0.6); border-radius: 18px; padding: 25px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        #controller-title { font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn-choice { background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; padding: 16px 30px; font-size: 1.1rem; font-weight: 700; border-radius: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); min-width: 220px; box-shadow: 0 4px 12px rgba(2,132,199,0.3); text-align: left; }
+        .btn-choice:hover { background: linear-gradient(135deg, #0369a1, #075985); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(2,132,199,0.5); }
+        .btn-choice:active { transform: translateY(1px); }
+
+        /* TIMER & REALTIME VOTING VIZ */
+        #timer { font-size: 3rem; font-weight: 900; color: #ff5252; margin: 15px 0; display: none; text-shadow: 0 0 15px rgba(255,82,82,0.5); animation: pulse 1s infinite; }
+        #vote-result { margin-top: 15px; font-size: 1.1rem; font-weight: 600; color: #00e676; display: none; background: rgba(0,230,118,0.1); padding: 10px 20px; border-radius: 8px; display: inline-block; }
+
+        /* PANEL CỦA HOST ĐIỀU KHIỂN */
+        #host-panel { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; gap: 12px; }
+        .btn-host { background: #475569; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: background 0.2s; }
+        .btn-host:hover { background: #334155; }
+
+        /* KEYFRAMES ANIMATIONS TỰ NHIÊN */
+        @keyframes idle-breath { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
+        @keyframes success-jump { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-35px) scale(0.95); } }
+        @keyframes fail-shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -1px) rotate(-1deg); } 30% { transform: translate(-2px, 0px) rotate(1deg); } 50% { transform: translate(1px, 1px) rotate(0deg); } 80% { transform: translate(-1px, 1px) rotate(-1deg); } 100% { transform: translate(1px, -1px) rotate(0deg); } }
+        @keyframes heavy-shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: 0.8; } }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>PTN PHÓNG XẠ – SINH TỒN KÝ</h1>
+        <div id="scene-title">MÀN HÌNH CHỜ (HOST VIEW)</div>
+        
+        <div id="lab-stage">
+            <div class="lab-grid"></div>
+            <div class="prop prop-fridge">
+                <div class="fridge-line"></div>
+                <div class="fridge-line"></div>
+            </div>
+            <div class="prop prop-hazard">☢</div>
+            <div class="prop prop-cabinet">
+                <div class="chem-bottle"></div><div class="chem-bottle"></div>
+                <div class="chem-bottle"></div><div class="chem-bottle"></div>
+                <div class="chem-bottle"></div><div class="chem-bottle"></div>
+            </div>
+            <div class="prop prop-table"></div>
+            <div class="prop prop-bin">RÁC PX</div>
+            <div id="spill-effect"></div>
+            <div id="smoke-cloud"></div>
+            
+            <div id="character" class="status-idle">
+                <div class="char-head">
+                    <div class="char-hair"></div>
+                    <div class="char-eyes"><div class="eye"></div><div class="eye"></div></div>
+                    <div class="char-mouth"></div>
+                </div>
+                <div class="char-body">
+                    <div class="hand-left"></div>
+                    <div class="hand-right"><div id="hand-item" class="item-holder">🧋</div></div>
+                </div>
+                <div class="char-legs">
+                    <div class="leg"><div class="shoes"></div></div>
+                    <div class="leg"><div class="shoes"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="story-text">Chào mừng bạn đến với mô phỏng Kỹ thuật An toàn Phóng xạ. Hãy nhấn nút [START GAME] bên dưới để bắt đầu thử thách!</div>
+        
+        <div id="timer">10</div>
+        <div id="vote-result" style="display:none;">Hệ thống đã sẵn sàng nhận kết nối...</div>
+
+        <div id="controller-box">
+            <div id="controller-title">📱 GIAO DIỆN TỰ THAO TÁC TRÊN ĐIỆN THOẠI HỌC SINH (CONTROLLER)</div>
+            <div class="btn-group" id="choices-wrapper">
+                <button class="btn-choice" onclick="startGame()">BẤM ĐỂ BẮT ĐẦU</button>
+            </div>
+        </div>
+
+        <div id="host-panel">
+            <button class="btn-host" onclick="startGame()">▶ START GAME</button>
+            <button class="btn-host" onclick="nextScene()">NEXT SCENE ➔</button>
+            <button class="btn-host" onclick="resetGame()">🔄 RESTART</button>
+        </div>
+    </div>
+
+    <script>
+        let currentScene = 0;
+        let countdown;
+        let isBlouseEquipped = false;
+        
+        const character = document.getElementById('character');
+        const handItem = document.getElementById('hand-item');
+        const storyText = document.getElementById('story-text');
+        const sceneTitle = document.getElementById('scene-title');
+        const container = document.getElementById('game-container');
+        const timerDisplay = document.getElementById('timer');
+        const voteResult = document.getElementById('vote-result');
+        const choicesWrapper = document.getElementById('choices-wrapper');
+        const smokeCloud = document.getElementById('smoke-cloud');
+        const spillEffect = document.getElementById('spill-effect');
+
+        // BỘ 5 CÂU HỎI SINH TỒN PHÓNG XẠ CHI TIẾT THEO SRS KÉO DÀI ĐẾN HẾT BUỔI THỰC HÀNH
+        const scriptData = {
+            1: {
+                title: "SCENE 1: THỦ TỤC TRƯỚC CỬA PHÒNG THÍ NGHIỆM",
+                text: "Bạn chuẩn bị bước vào phòng thí nghiệm phóng xạ. Trên tay bạn đang cầm ly trà sữa trân châu, mặc quần lửng ngắn và mang dép lê. Bạn quyết định thế nào?",
+                choices: [
+                    { key: 'A', text: 'A. Đi vào luôn, tranh thủ uống nốt trà sữa.' },
+                    { key: 'B', text: 'B. Thay quần dài, mang giày kín, mặc áo Blouse.' }
+                ]
+            },
+            2: {
+                title: "SCENE 2: THAO TÁC VỚI NGUỒN PHÓNG XẠ HỞ",
+                text: "Giảng viên yêu cầu bạn chiết tách dung dịch chứa đồng vị phóng xạ hở. Tuy nhiên, ngón tay bạn đang có vết xước nhỏ đã băng Urgo kín. Bạn xử lý sao?",
+                choices: [
+                    { key: 'A', text: 'A. Đeo găng tay dày đè lên vết thương rồi làm.' },
+                    { key: 'B', text: 'B. Báo ngay giảng viên từ chối tiếp xúc nguồn hở.' }
+                ]
+            },
+            3: {
+                title: "SCENE 3: SỰ CỐ ĐỔ TRÀN CHẤT PHÓNG XẠ",
+                text: "XOẢNG! Bạn lỡ tay làm đổ dung dịch chứa đồng vị phóng xạ ra mặt bàn thí nghiệm. Hành động ĐẦU TIÊN và quan trọng nhất của bạn lúc này là gì?",
+                choices: [
+                    { key: 'A', text: 'A. Lấy khăn giấy lau thật nhanh để xóa dấu vết.' },
+                    { key: 'B', text: 'B. Hô to thông báo để mọi người xung quanh né xa.' },
+                    { key: 'C', text: 'C. Hoảng sợ chạy ngay ra ngoài tìm Trưởng phòng.' }
+                ]
+            },
+            4: {
+                title: "SCENE 4: NGUYÊN TẮC AN TOÀN KHI ĐO MẪU (ALARA)",
+                text: "Sau khi xử lý xong sự cố, bạn cần đo hoạt độ phóng xạ của một nguồn kín. Để giảm thiểu liều chiếu xạ vào cơ thể theo nguyên tắc ALARA, bạn chọn cách nào?",
+                choices: [
+                    { key: 'A', text: 'A. Đứng càng xa nguồn càng tốt, dùng kẹp dài thao tác.' },
+                    { key: 'B', text: 'B. Thao tác thật nhanh và ghé sát mắt xem cho rõ.' }
+                ]
+            },
+            5: {
+                title: "SCENE 5: THU GOM RÁC THẢI CUỐI GIỜ THỰC HÀNH",
+                text: "Buổi thực hành kết thúc, bạn cần dọn dẹp các bông thấm, găng tay cao su cũ dính bẩn phóng xạ. Bạn sẽ vứt chúng vào đâu?",
+                choices: [
+                    { key: 'A', text: 'A. Thùng rác sinh hoạt thông thường ở góc lớp.' },
+                    { key: 'B', text: 'B. Thùng rác y tế màu đỏ dán biển tam giác cảnh báo phóng xạ.' }
+                ]
+            }
+        };
+
+        function startGame() {
+            currentScene = 1;
+            isBlouseEquipped = false;
+            loadScene(currentScene);
+        }
+
+        function loadScene(sceneId) {
+            container.className = ""; 
+            spillEffect.classList.remove('spill-active');
+            smokeCloud.style.display = "none";
+            voteResult.style.display = "none";
+            character.className = "status-idle";
+            
+            if(!isBlouseEquipped) {
+                handItem.style.display = "block";
+                character.style.left = "15%";
+            } else {
+                character.style.left = "45%";
+            }
+
+            const data = scriptData[sceneId];
+            sceneTitle.innerText = data.title;
+            storyText.innerText = data.text;
+
+            choicesWrapper.innerHTML = "";
+            data.choices.forEach(c => {
+                choicesWrapper.innerHTML += `<button class="btn-choice" onclick="handleVote('${c.key}')">${c.text}</button>`;
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            let count = 10;
+            timerDisplay.style.display = "block";
+            timerDisplay.innerText = count;
+            clearInterval(countdown);
+            
+            countdown = setInterval(() => {
+                count--;
+                timerDisplay.innerText = count;
+                if(count <= 0) {
+                    clearInterval(countdown);
+                    timerDisplay.style.display = "none";
+                    handleVote('A'); // Tự động chọn phương án lỗi nếu hết giờ
+                }
+            }, 1000);
+        }
+
+        function handleVote(choice) {
+            clearInterval(countdown);
+            timerDisplay.style.display = "none";
+            voteResult.style.display = "block";
+            voteResult.innerText = `Lớp bầu chọn phương án [${choice}] (Đã khóa vote)`;
+
+            if (currentScene === 1) {
+                if (choice === 'A') {
+                    triggerFail("GAME OVER!<br>Bạn bị dính phóng xạ qua đường ăn uống (trà sữa) và bị trục xuất ngay lập tức vì vi phạm trang phục bảo hộ!");
+                } else {
+                    isBlouseEquipped = true;
+                    triggerSuccess("CHÍNH XÁC!<br>Nhân vật Bo tự động đổi skin: Mặc áo Blouse trắng dài tay, xỏ giày bảo hộ kín mũi chuẩn quy trình an toàn.");
+                }
+            } 
+            else if (currentScene === 2) {
+                if (choice === 'A') {
+                    triggerFail("HẬU QUẢ NGHIÊM TRỌNG!<br>Chất phóng xạ hở lọt qua lỗ hở siêu vi của găng tay ngấm thẳng vào mạch máu qua vết xước. Bạn phải đi cấp cứu!");
+                } else {
+                    triggerSuccess("XỬ LÝ QUÁ CHUẨN ĐẠO ĐỨC AN TOÀN!<br>Tuyệt đối không thao tác với nguồn hở khi có vết thương để phòng chiếu xạ nội. Giảng viên khen ngợi!");
+                }
+            } 
+            else if (currentScene === 3) {
+                spillEffect.classList.add('spill-active');
+                if (choice === 'A' || choice === 'C') {
+                    triggerFail("SAI QUY TRÌNH SƠ CỨU SỰ CỐ!<br>Lau khăn giấy thường làm loang rộng vết nhiễm xạ, hoặc bỏ chạy làm tăng nguy cơ nhiễm chéo ra hành lang. GAME OVER!");
+                } else {
+                    triggerSuccess("XỬ LÝ CHUẨN SÁCH GIÁO KHOA!<br>Nhân vật cầm loa cảnh báo mọi người né xa, sau đó cô lập dung dịch bằng giấy thấm chuyên dụng bỏ vào thùng rác phóng xạ.");
+                }
+            }
+            else if (currentScene === 4) {
+                if (choice === 'B') {
+                    triggerFail("QUÁ NGUY HIỂM!<br>Ghé sát mắt làm tăng liều chiếu xạ cục bộ lên thủy tinh thể. Bạn đã vi phạm nguyên tắc Tối ưu hóa an toàn bức xạ!");
+                } else {
+                    triggerSuccess("XỨ LÝ XUẤT SẮC!<br>Bạn đã áp dụng chuẩn nguyên tắc ALARA: Tăng khoảng cách thao tác bằng kẹp dài giúp giảm lũy thừa liều hấp thụ bức xạ.");
+                }
+            }
+            else if (currentScene === 5) {
+                if (choice === 'A') {
+                    triggerFail("VI PHẠM PHÁP LUẬT AN TOÀN!<br>Vứt rác nhiễm xạ vào thùng rác thường gây rò rỉ bức xạ nguy hiểm cho công nhân vệ sinh và cộng đồng. BÀI THI THẤT BẠI!");
+                } else {
+                    triggerSuccess("🎉 CHÚC MỪNG BẠN ĐÃ CHIẾN THẮNG!<br>Rác thải phóng xạ được gom riêng biệt để đưa đi xử lý hạt nhân đặc biệt. BẠN ĐÃ SỐNG SÓT QUA NGÀY ĐẦU TIÊN Ở PTN!");
+                }
+            }
+        }
+
+        function triggerSuccess(msg) {
+            container.classList.add('success-bg');
+            character.className = "status-success";
+            handItem.style.display = "none";
+            storyText.innerHTML = msg;
+        }
+
+        function triggerFail(msg) {
+            container.classList.add('fail-bg');
+            character.className = "status-fail";
+            smokeCloud.style.display = "block";
+            storyText.innerHTML = msg;
+        }
+
+        function nextScene() {
+            if(currentScene < 5 && currentScene > 0) {
+                currentScene++;
+                loadScene(currentScene);
+            }
+        }
+
+        function resetGame() {
+            currentScene = 0;
+            isBlouseEquipped = false;
+            clearInterval(countdown);
+            container.className = "";
+            timerDisplay.style.display = "none";
+            voteResult.style.display = "none";
+            handItem.style.display = "none";
+            smokeCloud.style.display = "none";
+            spillEffect.classList.remove('spill-active');
+            character.className = "status-idle";
+            character.style.left = "45%";
+            sceneTitle.innerText = "MÀN HÌNH CHỜ (HOST VIEW)";
+            storyText.innerText = "Chào mừng bạn đến với mô phỏng Kỹ thuật An toàn Phóng xạ. Hãy nhấn nút [START GAME] bên dưới để bắt đầu thử thách!";
+            choicesWrapper.innerHTML = `<button class="btn-choice" onclick="startGame()">BẤM ĐỂ BẮT ĐẦU</button>`;
+        }
+    </script>
+</body>
+</html>
