@@ -1,657 +1,292 @@
-# SOFTWARE REQUIREMENT SPECIFICATION (SRS)
-# Dự án: PTN PHÓNG XẠ – SINH TỒN KÝ
-Phiên bản: 1.0
-
-===========================================================
-1. MÔ TẢ DỰ ÁN
-===========================================================
-
-Xây dựng một web game tương tác nhiều người chơi theo dạng Interactive Story Game.
-
-Mỗi học sinh sử dụng điện thoại như một "tay cầm điều khiển" thông qua QR Code.
-
-Máy tính kết nối máy chiếu chỉ hiển thị:
-- Bối cảnh
-- Nhân vật
-- Hiệu ứng
-- Nội dung câu chuyện
-- Kết quả bình chọn
-
-Không hiển thị nút bấm trên màn hình lớn.
-
-Điện thoại chỉ hiển thị:
-- Câu hỏi
-- Nút lựa chọn A/B/C
-- Đồng hồ đếm ngược
-
-Không hiển thị hình nền hoặc nhân vật.
-
-===========================================================
-2. CÔNG NGHỆ
-===========================================================
-
-Frontend:
-- HTML5
-- CSS3
-- JavaScript ES6
-
-Realtime:
-- Firebase Realtime Database (ưu tiên)
-hoặc
-- Socket.io
-
-Triển khai:
-- GitHub Pages
-- Vercel
-- Netlify
-
-Responsive:
-- Desktop
-- Mobile
-- Tablet
-
-===========================================================
-3. KIẾN TRÚC
-===========================================================
-
-                Internet
-
-                     │
-
-        Firebase Realtime Database
-           hoặc Socket.io
-
-        ┌────────────┴────────────┐
-
-        │                         │
-
-   DISPLAY MODE             CONTROLLER MODE
-
- Máy chiếu                    Điện thoại
-
- Hiển thị game                Chỉ hiện nút A/B/C
-
- Không có nút                 Không có hình nền
-
- Chạy animation               Chỉ gửi vote
-
-===========================================================
-4. CÁC TRANG WEB
-===========================================================
-
-/
-
-Trang chờ
-
-Hiển thị:
-
-- Logo game
-- QR Code
-- Số người đã kết nối
-- Nút Start (Host)
-
------------------------------------------------------------
-
-/display
-
-Màn hình lớn.
-
-Hiển thị:
-
-- Background
-- Nhân vật
-- Animation
-- Câu hỏi
-- Hiệu ứng
-- Kết quả vote
-
-Không có nút lựa chọn.
-
------------------------------------------------------------
-
-/controller
-
-Điện thoại.
-
-Hiển thị:
-
-======================
-CÂU HỎI
-
-[A]
-
-[B]
-
-[C]
-======================
-
-Không hiển thị game.
-
------------------------------------------------------------
-
-/host
-
-Điều khiển game.
-
-Bao gồm:
-
-Start
-
-Next
-
-Previous
-
-Restart
-
-Reset Vote
-
-Fullscreen
-
-Mute
-
-Auto Play
-
-===========================================================
-5. GIAO DIỆN
-===========================================================
-
-Background
-
-Phong cách:
-
-Flat Cartoon
-
-Phòng thí nghiệm hiện đại.
-
-Bao gồm:
-
-- Bàn thí nghiệm
-- Tủ lạnh
-- Tủ hóa chất
-- Biểu tượng phóng xạ
-- Giá đựng mẫu
-- Tủ bảo hộ
-- Thùng rác phóng xạ
-
-Tông màu:
-
-- Xanh nhạt
-- Trắng
-- Vàng cảnh báo
-
-===========================================================
-6. NHÂN VẬT
-===========================================================
-
-Một avatar sinh viên.
-
-Có 3 trạng thái.
-
-IDLE
-
-- đứng
-- thở
-- chớp mắt
-- vẫy tay
-
-SUCCESS
-
-- mặc blouse
-- mang giày
-- nhảy
-- giơ chữ V
-
-FAIL
-
-- nổ đen
-- tóc dựng
-- mắt xoáy
-- khói
-- mặt hoảng
-
-===========================================================
-7. LUỒNG GAME
-===========================================================
-
-START
-
-↓
-
-Hiện QR
-
-↓
-
-Học sinh kết nối
-
-↓
-
-Host Start
-
-↓
-
-Scene 1
-
-↓
-
-Vote
-
-↓
-
-Animation
-
-↓
-
-Scene 2
-
-↓
-
-Vote
-
-↓
-
-Animation
-
-↓
-
-Scene 3
-
-↓
-
-Vote
-
-↓
-
-Ending
-
-===========================================================
-8. MÀN HÌNH CHỜ
-===========================================================
-
-Hiển thị:
-
-============================
-
-PTN PHÓNG XẠ
-
-SINH TỒN KÝ
-
-Quét QR để tham gia
-
-[ QR CODE ]
-
-Đã kết nối:
-
-23 người
-
-============================
-
-===========================================================
-9. KỊCH BẢN
-===========================================================
-
--------------------------
-SCENE 1
--------------------------
-
-Background
-
-Cửa phòng thí nghiệm.
-
-Avatar:
-
-- cầm trà sữa
-- quần lửng
-- dép lê
-
-Text:
-
-"Bạn chuẩn bị bước vào PTN phóng xạ.
-Bạn sẽ làm gì?"
-
-Controller
-
-A
-
-Cứ đi vào.
-
-B
-
-Đổi trang phục đúng quy định.
-
-Nếu A thắng
-
-Animation FAIL
-
-Hiện:
-
-GAME OVER
-
-Bạn bị nhiễm xạ qua đường ăn uống
-và bị đuổi ngay từ vòng gửi xe.
-
-Hiện nút:
-
-Restart
-
-Nếu B thắng
-
-Animation SUCCESS
-
-Avatar đổi skin:
-
-- blouse
-- quần dài
-- giày kín
-
-Host bấm Next.
-
--------------------------------------------------------
-
-SCENE 2
-
-Avatar
-
-Đã mặc blouse.
-
-Ngón tay có vết thương.
-
-Text
-
-"Giảng viên giao cho bạn
-một mẫu phóng xạ hở."
-
-Vote
-
-A
-
-Đeo găng rồi làm.
-
-B
-
-Báo giảng viên.
-
-Nếu A
-
-Animation FAIL
-
-Ngón tay phát sáng.
-
-Text
-
-HẬU QUẢ
-
-Chất phóng xạ
-ngấm qua vết thương.
-
-Bạn phải cấp cứu.
-
-Nếu B
-
-Animation SUCCESS
-
-Avatar gật đầu.
-
-Next.
-
--------------------------------------------------------
-
-SCENE 3
-
-Avatar làm đổ dung dịch.
-
-Có animation chất lỏng tràn.
-
-Text
-
-"XOẢNG!
-
-Dung dịch bị đổ.
-
-Bạn làm gì đầu tiên?"
-
-Vote
-
-A
-
-Lau bằng khăn giấy.
-
-B
-
-Bỏ chạy.
-
-C
-
-Thông báo mọi người.
-
-Nếu A hoặc B
-
-Animation FAIL
-
-Text
-
-Bạn làm lan rộng
-ô nhiễm phóng xạ.
-
-GAME OVER
-
-Nếu C
-
-Animation SUCCESS
-
-Avatar cầm loa.
-
-Sau đó hiện:
-
-- giấy thấm chuyên dụng
-- thu gom
-- thùng rác phóng xạ
-
-Hiện chữ:
-
-CHÚC MỪNG
-
-BẠN ĐÃ SỐNG SÓT XUẤT SẮC
-
-===========================================================
-10. HỆ THỐNG BÌNH CHỌN
-===========================================================
-
-Mỗi điện thoại chỉ được vote 1 lần.
-
-Vote gửi realtime.
-
-Ví dụ:
-
-A
-
-32
-
-B
-
-46
-
-C
-
-12
-
-Hiển thị phần trăm:
-
-A 35%
-
-B 50%
-
-C 15%
-
-Sau 10 giây
-
-Tự khóa vote.
-
-Đáp án nhiều phiếu nhất thắng.
-
-===========================================================
-11. TIMER
-===========================================================
-
-Hiển thị
-
-10
-
-9
-
-8
-
-7
-
-6
-
-...
-
-0
-
-Hết giờ
-
-Vote tự khóa.
-
-===========================================================
-12. HIỆU ỨNG
-===========================================================
-
-Success
-
-- Confetti
-- Sparkle
-- Bounce
-- Glow
-
-Fail
-
-- Explosion
-- Smoke
-- Flash đỏ
-- Camera Shake
-
-Vote
-
-- Thanh tiến trình
-- Hiệu ứng tăng %
-
-===========================================================
-13. ÂM THANH
-===========================================================
-
-Success
-
-- Victory
-
-Fail
-
-- Explosion
-
-Vote
-
-- Tick
-
-Countdown
-
-- Beep
-
-Ending
-
-- Happy Ending Music
-
-===========================================================
-14. QR CODE
-===========================================================
-
-Trang chủ luôn hiển thị QR.
-
-Ví dụ
-
-https://domain.com/controller
-
-QR tự sinh.
-
-===========================================================
-15. CẤU TRÚC THƯ MỤC
-===========================================================
-
-PTN-Phong-Xa/
-
-│
-
-├── index.html
-├── display.html
-├── controller.html
-├── host.html
-
-│
-
-├── css/
-
-│      style.css
-│      display.css
-│      controller.css
-
-│
-
-├── js/
-
-│      app.js
-│      firebase.js
-│      display.js
-│      controller.js
-│      host.js
-
-│
-
-├── assets/
-
-│      backgrounds/
-│      characters/
-│      sounds/
-│      effects/
-
-│
-
-├── package.json
-
-└── README.md
-
-===========================================================
-16. TIÊU CHÍ HOÀN THÀNH
-===========================================================
-
-✓ Hỗ trợ tối thiểu 100 người chơi cùng lúc.
-
-✓ Đồng bộ realtime dưới 500ms.
-
-✓ Có 3 chế độ:
-- Display
-- Controller
-- Host
-
-✓ Có đồng hồ đếm ngược.
-
-✓ Có QR Code tự sinh.
-
-✓ Có hiệu ứng và âm thanh.
-
-✓ Có animation cho nhân vật.
-
-✓ Responsive trên điện thoại và máy tính.
-
-✓ Chạy trực tiếp trên GitHub Pages hoặc Vercel.
-
-===========================================================
-17. YÊU CẦU CHẤT LƯỢNG
-===========================================================
-
-- Giao diện hiện đại, sinh động, phong cách hoạt hình (Cartoon Flat Design), phù hợp học sinh THCS và THPT.
-- Animation mượt (60 FPS nếu có thể).
-- Màu sắc tươi sáng, dễ nhìn trên máy chiếu.
-- Hiệu ứng chuyển cảnh mượt.
-- Code được chia module rõ ràng, dễ mở rộng thêm câu hỏi hoặc kịch bản.
-- Không sử dụng thư viện nặng không cần thiết.
-- Tối ưu hiệu năng để nhiều thiết bị truy cập đồng thời.
-- Có chú thích (comment) đầy đủ trong mã nguồn.
-- Toàn bộ dự án phải sẵn sàng deploy lên GitHub Pages hoặc Vercel ngay sau khi hoàn thành.
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTN Phóng Xạ - Sinh Tồn Ký</title>
+    <style>
+        /* CSS RESET & GENERAL STYLE */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #e0f2f1; color: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+        
+        /* CONTAINER CHÍNH MÔ PHỎNG MÀN HÌNH MÁY CHIẾU (DISPLAY MODE) */
+        #game-container { width: 100%; max-width: 1024px; background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 30px; position: relative; text-align: center; border: 4px solid #fff; transition: all 0.5s ease; }
+        .fail-bg { background-color: #ffebee !important; border-color: #ef5350 !important; animation: shake 0.5s; }
+        .success-bg { background-color: #e8f5e9 !important; border-color: #66bb6a !important; }
+
+        /* TIÊU ĐỀ & TRẠNG THÁI */
+        h1 { color: #00796b; font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        #scene-title { font-weight: bold; color: #f57c00; font-size: 1.2rem; margin-bottom: 20px; }
+        #story-text { font-size: 1.5rem; line-height: 1.6; margin: 20px auto; max-width: 800px; min-height: 80px; font-weight: 600; }
+
+        /* KHU VỰC PHÒNG THÍ NGHIỆM & NHÂN VẬT ANTS */
+        #lab-stage { width: 100%; height: 350px; background: linear-gradient(to bottom, #eceff1, #cfd8dc); border-radius: 15px; position: relative; margin-bottom: 25px; overflow: hidden; border: 3px solid #b0bec5; }
+        
+        /* Chi tiết PTN phục vụ SRS */
+        .prop { position: absolute; background: #90a4ae; border-radius: 4px; color: white; font-size: 11px; padding: 5px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .prop-fridge { width: 70px; height: 160px; left: 40px; bottom: 40px; background: #b0bec5; border: 2px solid #78909c; }
+        .prop-hazard { width: 50px; height: 50px; top: 20px; right: 40px; background: #fbc02d; border-radius: 50%; border: 3px solid #333; color: #333; font-size: 24px; justify-content: center; }
+        .prop-bin { width: 60px; height: 80px; right: 50px; bottom: 40px; background: #e53935; border-radius: 5px 5px 0 0; }
+        .prop-table { width: 60%; height: 40px; left: 20%; bottom: 40px; background: #78909c; border-radius: 5px; z-index: 2; }
+        
+        /* HIỆU ỨNG TRÀN CHẤT LỎNG (SCENE 3) */
+        #spill-effect { position: absolute; width: 120px; height: 20px; background: #00e676; bottom: 80px; left: 45%; border-radius: 50%; opacity: 0; z-index: 3; }
+        .spill-active { opacity: 1 !important; transform: scale(1.5); transition: all 1s ease; }
+
+        /* AVATAR NHÂN VẬT (MÔ PHỎNG HOẠT HÌNH) */
+        #character { width: 100px; height: 180px; position: absolute; bottom: 75px; left: 45%; z-index: 5; transition: all 0.5s ease; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+        
+        /* Các bộ phận vẽ bằng CSS để dễ chạy động */
+        .char-head { width: 50px; height: 50px; background: #ffccbc; border-radius: 50%; position: relative; transition: all 0.3s; }
+        .char-body { width: 60px; height: 90px; background: #ff5722; border-radius: 10px 10px 0 0; position: relative; transition: all 0.3s; margin-top: -5px; display: flex; justify-content: center; }
+        .char-feet { width: 100%; display: flex; justify-content: space-around; }
+        .foot { width: 20px; height: 15px; background: #795548; border-radius: 5px 5px 0 0; }
+        .item-hand { position: absolute; width: 25px; height: 40px; background: #ffcc80; right: -20px; top: 10px; border-radius: 5px; font-size: 12px; text-align: center; line-height: 1.2; display: none; }
+
+        /* ANIMATION TRẠNG THÁI (SRS CHƯƠNG 6) */
+        /* IDLE */
+        .status-idle { animation: bounce 1.5s infinite alternate; }
+        /* SUCCESS */
+        .status-success .char-body { background: #ffffff !important; border: 2px solid #00796b; box-shadow: inset 0 20px 0 #00796b; }
+        .status-success .foot { background: #333 !important; border-radius: 5px; }
+        .status-success { animation: jump 0.6s infinite alternate; }
+        /* FAIL */
+        .status-fail .char-head { background: #555 !important; border-radius: 4px; }
+        .status-fail .char-body { background: #333 !important; animation: smoke 0.3s infinite; }
+        .status-fail { animation: shake 0.2s infinite; }
+
+        /* MÔ PHỎNG CONTROLLER MODE (BẤM TRÊN ĐIỆN THOẠI) */
+        #controller-box { width: 100%; margin-top: 20px; background: #f5f5f5; border-radius: 15px; padding: 20px; border: 2px dashed #b2dfdb; }
+        #controller-title { font-size: 1rem; color: #757575; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn-choice { background: #009688; color: white; border: none; padding: 15px 35px; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; transition: all 0.2s; min-width: 150px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-choice:hover { background: #00796b; transform: translateY(-2px); }
+        .btn-choice:active { transform: translateY(1px); }
+
+        /* ĐỒNG HỒ ĐẾM NGƯỢC & THÔNG BÁO VOTE */
+        #timer { font-size: 2.5rem; font-weight: bold; color: #e53935; margin: 15px 0; display: none; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+        #vote-result { margin-top: 15px; font-size: 1.2rem; font-weight: bold; color: #00796b; display: none; }
+
+        /* KHUNG CHỨA HỆ THỐNG ĐIỀU KHIỂN CỦA HOST (SRS CHƯƠNG 4) */
+        #host-panel { margin-top: 25px; padding-top: 15px; border-top: 2px solid #cfd8dc; display: flex; justify-content: center; gap: 10px; }
+        .btn-host { background: #607d8b; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
+        .btn-host:hover { background: #455a64; }
+
+        /* ĐỊNH NGHĨA KEYFRAMES ANIMATION */
+        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        @keyframes jump { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-30px) scale(0.9); } }
+        @keyframes shake { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(0px, 2px) rotate(0deg); } 50% { transform: translate(1px, -1px) rotate(1deg); } 100% { transform: translate(2px, 1px) rotate(0deg); } }
+        @keyframes smoke { 0% { box-shadow: 0 0 0 rgba(0,0,0,0); } 50% { box-shadow: 0 -10px 20px #555; } 100% { box-shadow: 0 0 0 rgba(0,0,0,0); } }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>PTN PHÓNG XẠ – SINH TỒN KÝ</h1>
+        <div id="scene-title">MÀN HÌNH CHỜ (HOST SCREEN)</div>
+        
+        <div id="lab-stage">
+            <div class="prop prop-fridge">TỦ LẠNH</div>
+            <div class="prop prop-hazard">☢</div>
+            <div class="prop prop-table">BÀN THÍ NGHIỆM</div>
+            <div class="prop prop-bin">RÁC PX</div>
+            <div id="spill-effect"></div>
+            
+            <div id="character" class="status-idle">
+                <div class="char-head">
+                    <div style="position:absolute; width:6px; height:6px; background:#333; border-radius:50%; top:20px; left:12px;"></div>
+                    <div style="position:absolute; width:6px; height:6px; background:#333; border-radius:50%; top:20px; right:12px;"></div>
+                </div>
+                <div class="char-body">
+                    <div id="hand-item" class="item-hand">🧋</div>
+                </div>
+                <div class="char-feet">
+                    <div class="foot"></div>
+                    <div class="foot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="story-text">Quét mã QR Code hoặc nhấn nút [START] bên dưới hệ thống điều khiển của Host để bắt đầu màn thực tập sinh tồn!</div>
+        
+        <div id="timer">10</div>
+        <div id="vote-result">Đang tổng hợp phiếu bầu từ các thiết bị...</div>
+
+        <div id="controller-box">
+            <div id="controller-title">📱 GIAO DIỆN TƯƠNG TÁC TRÊN ĐIỆN THOẠI HỌC SINH (CONTROLLER)</div>
+            <div class="btn-group" id="choices-wrapper">
+                <button class="btn-choice" onclick="selectChoice('A')">A</button>
+                <button class="btn-choice" onclick="selectChoice('B')">B</button>
+            </div>
+        </div>
+
+        <div id="host-panel">
+            <button class="btn-host" onclick="startGame()">▶ START GAME</button>
+            <button class="btn-host" onclick="nextScene()">NEXT SCENE ➔</button>
+            <button class="btn-host" onclick="resetGame()">🔄 RESTART</button>
+        </div>
+    </div>
+
+    <script>
+        // QUẢN LÝ TRẠNG THÁI GAME THEO SRS
+        let currentScene = 0;
+        let countdown;
+        
+        const character = document.getElementById('character');
+        const handItem = document.getElementById('hand-item');
+        const storyText = document.getElementById('story-text');
+        const sceneTitle = document.getElementById('scene-title');
+        const container = document.getElementById('game-container');
+        const timerDisplay = document.getElementById('timer');
+        const voteResult = document.getElementById('vote-result');
+        const choicesWrapper = document.getElementById('choices-wrapper');
+
+        // DANH SÁCH DỮ LIỆU KỊCH BẢN CHƯƠNG 9
+        const scriptData = {
+            1: {
+                title: "SCENE 1: CỬA PHÒNG THÍ NGHIỆM",
+                text: "Bạn chuẩn bị bước vào PTN phóng xạ. Trên tay đang cầm ly trà sữa, mặc quần lửng, dép lê. Bạn sẽ làm gì?",
+                choices: [
+                    { key: 'A', text: 'A: Cứ đi vào luôn, không sao đâu!' },
+                    { key: 'B', text: 'B: Thay đồ bảo hộ, cất trà sữa.' }
+                ]
+            },
+            2: {
+                title: "SCENE 2: THAO TÁC VỚI MẪU PHÓNG XẠ HỞ",
+                text: "Giảng viên giao cho bạn một lọ chứa đồng vị phóng xạ hở. Tuy nhiên, ngón tay bạn đang có một vết xước nhẹ đã băng Urgo. Bạn xử lý sao?",
+                choices: [
+                    { key: 'A', text: 'A: Đeo găng tay đè lên vết thương rồi làm.' },
+                    { key: 'B', text: 'B: Báo ngay với GV để xin đổi việc.' }
+                ]
+            },
+            3: {
+                title: "SCENE 3: XOẢNG!!! SỰ CỐ ĐỔ TRÀN",
+                text: "Bạn vô tình trượt tay làm đổ một lọ dung dịch chứa chất phóng xạ ra bàn thí nghiệm! Hành động đầu tiên của bạn là gì?",
+                choices: [
+                    { key: 'A', text: 'A: Lấy khăn giấy lau thật nhanh.' },
+                    { key: 'B', text: 'B: Sợ quá, bỏ chạy ra ngoài.' },
+                    { key: 'C', text: 'C: Hô to cảnh báo mọi người né xa.' }
+                ]
+            }
+        };
+
+        function startGame() {
+            currentScene = 1;
+            loadScene(currentScene);
+        }
+
+        function loadScene(sceneId) {
+            container.className = ""; 
+            document.getElementById('spill-effect').classList.remove('spill-active');
+            voteResult.style.display = "none";
+            
+            character.className = "status-idle";
+            
+            if(sceneId === 1) {
+                handItem.style.display = "block"; 
+                character.style.left = "15%"; 
+            } else if(sceneId === 2) {
+                handItem.style.display = "none";
+                character.style.left = "45%";
+            } else if(sceneId === 3) {
+                character.style.left = "45%";
+            }
+
+            const data = scriptData[sceneId];
+            sceneTitle.innerText = data.title;
+            storyText.innerText = data.text;
+
+            // Đổi nút bấm mô phỏng trên điện thoại học sinh
+            choicesWrapper.innerHTML = "";
+            data.choices.forEach(c => {
+                choicesWrapper.innerHTML += `<button class="btn-choice" onclick="handleVote('${c.key}')">${c.text}</button>`;
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            let count = 10;
+            timerDisplay.style.display = "block";
+            timerDisplay.innerText = count;
+            clearInterval(countdown);
+            
+            countdown = setInterval(() => {
+                count--;
+                timerDisplay.innerText = count;
+                if(count <= 0) {
+                    clearInterval(countdown);
+                    timerDisplay.style.display = "none";
+                }
+            }, 1000);
+        }
+
+        // MÔ PHỎNG XỬ LÝ KẾT QUẢ VOTE (CHẠY ANIMATION THEO SRS CHƯƠNG 9)
+        function handleVote(choice) {
+            clearInterval(countdown);
+            timerDisplay.style.display = "none";
+            voteResult.style.display = "block";
+            voteResult.innerText = `Đã khóa vote! Phương án [${choice}] chiếm đa số (100% người chọn).`;
+
+            if (currentScene === 1) {
+                if (choice === 'A') {
+                    container.classList.add('fail-bg');
+                    character.className = "status-fail";
+                    storyText.innerHTML = "❌ GAME OVER!<br>Bạn bị nhiễm xạ qua đường ăn uống và bị đuổi ngay từ vòng gửi xe.";
+                } else {
+                    container.classList.add('success-bg');
+                    character.className = "status-success";
+                    handItem.style.display = "none";
+                    storyText.innerHTML = "✓ CHÍNH XÁC!<br>Avatar đổi skin: Mặc áo Blouse dài tay, đi giày bảo hộ kín mũi chuẩn PTN.";
+                }
+            } 
+            else if (currentScene === 2) {
+                if (choice === 'A') {
+                    container.classList.add('fail-bg');
+                    character.className = "status-fail";
+                    storyText.innerHTML = "❌ HẬU QUẢ NGHIÊM TRỌNG!<br>Chất phóng xạ ngấm qua lỗ hở cực nhỏ của găng tay vào vết thương. Bạn phải đi cấp cứu khẩn cấp!";
+                } else {
+                    container.classList.add('success-bg');
+                    character.className = "status-success";
+                    storyText.innerHTML = "✓ CHUẨN XÁC!<br>Văn hóa an toàn tốt. Không tiếp xúc với nguồn hở khi có vết thương để phòng nhiễm chiếu xạ nội.";
+                }
+            } 
+            else if (currentScene === 3) {
+                if (choice === 'A' || choice === 'B') {
+                    container.classList.add('fail-bg');
+                    character.className = "status-fail";
+                    document.getElementById('spill-effect').classList.add('spill-active');
+                    storyText.innerHTML = "❌ THẤT BẠI!<br>Hành động này làm lan rộng ô nhiễm phóng xạ ra môi trường và gây hại cho người khác. GAME OVER!";
+                } else {
+                    container.classList.add('success-bg');
+                    character.className = "status-success";
+                    document.getElementById('spill-effect').classList.add('spill-active');
+                    storyText.innerHTML = "🎉 CHÚC MỪNG!<br>Bạn áp dụng đúng quy trình ứng phó sự cố: Báo động ➔ Dùng giấy thấm chuyên dụng cô lập nguồn ➔ Thu gom vào thùng rác phóng xạ. BẠN ĐÃ SỐNG SÓT XUẤT SẮC!";
+                }
+            }
+        }
+
+        function nextScene() {
+            if(currentScene < 3 && currentScene > 0) {
+                currentScene++;
+                loadScene(currentScene);
+            }
+        }
+
+        function resetGame() {
+            currentScene = 0;
+            clearInterval(countdown);
+            container.className = "";
+            timerDisplay.style.display = "none";
+            voteResult.style.display = "none";
+            handItem.style.display = "none";
+            document.getElementById('spill-effect').classList.remove('spill-active');
+            character.className = "status-idle";
+            character.style.left = "45%";
+            sceneTitle.innerText = "MÀN HÌNH CHỜ (HOST SCREEN)";
+            storyText.innerText = "Quét mã QR Code hoặc nhấn nút [START] bên dưới hệ thống điều khiển của Host để bắt đầu màn thực tập sinh tồn!";
+            choicesWrapper.innerHTML = `<button class="btn-choice" onclick="startGame()">A</button><button class="btn-choice" onclick="startGame()">B</button>`;
+        }
+    </script>
+</body>
+</html>
