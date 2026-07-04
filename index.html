@@ -1,0 +1,657 @@
+# SOFTWARE REQUIREMENT SPECIFICATION (SRS)
+# Dự án: PTN PHÓNG XẠ – SINH TỒN KÝ
+Phiên bản: 1.0
+
+===========================================================
+1. MÔ TẢ DỰ ÁN
+===========================================================
+
+Xây dựng một web game tương tác nhiều người chơi theo dạng Interactive Story Game.
+
+Mỗi học sinh sử dụng điện thoại như một "tay cầm điều khiển" thông qua QR Code.
+
+Máy tính kết nối máy chiếu chỉ hiển thị:
+- Bối cảnh
+- Nhân vật
+- Hiệu ứng
+- Nội dung câu chuyện
+- Kết quả bình chọn
+
+Không hiển thị nút bấm trên màn hình lớn.
+
+Điện thoại chỉ hiển thị:
+- Câu hỏi
+- Nút lựa chọn A/B/C
+- Đồng hồ đếm ngược
+
+Không hiển thị hình nền hoặc nhân vật.
+
+===========================================================
+2. CÔNG NGHỆ
+===========================================================
+
+Frontend:
+- HTML5
+- CSS3
+- JavaScript ES6
+
+Realtime:
+- Firebase Realtime Database (ưu tiên)
+hoặc
+- Socket.io
+
+Triển khai:
+- GitHub Pages
+- Vercel
+- Netlify
+
+Responsive:
+- Desktop
+- Mobile
+- Tablet
+
+===========================================================
+3. KIẾN TRÚC
+===========================================================
+
+                Internet
+
+                     │
+
+        Firebase Realtime Database
+           hoặc Socket.io
+
+        ┌────────────┴────────────┐
+
+        │                         │
+
+   DISPLAY MODE             CONTROLLER MODE
+
+ Máy chiếu                    Điện thoại
+
+ Hiển thị game                Chỉ hiện nút A/B/C
+
+ Không có nút                 Không có hình nền
+
+ Chạy animation               Chỉ gửi vote
+
+===========================================================
+4. CÁC TRANG WEB
+===========================================================
+
+/
+
+Trang chờ
+
+Hiển thị:
+
+- Logo game
+- QR Code
+- Số người đã kết nối
+- Nút Start (Host)
+
+-----------------------------------------------------------
+
+/display
+
+Màn hình lớn.
+
+Hiển thị:
+
+- Background
+- Nhân vật
+- Animation
+- Câu hỏi
+- Hiệu ứng
+- Kết quả vote
+
+Không có nút lựa chọn.
+
+-----------------------------------------------------------
+
+/controller
+
+Điện thoại.
+
+Hiển thị:
+
+======================
+CÂU HỎI
+
+[A]
+
+[B]
+
+[C]
+======================
+
+Không hiển thị game.
+
+-----------------------------------------------------------
+
+/host
+
+Điều khiển game.
+
+Bao gồm:
+
+Start
+
+Next
+
+Previous
+
+Restart
+
+Reset Vote
+
+Fullscreen
+
+Mute
+
+Auto Play
+
+===========================================================
+5. GIAO DIỆN
+===========================================================
+
+Background
+
+Phong cách:
+
+Flat Cartoon
+
+Phòng thí nghiệm hiện đại.
+
+Bao gồm:
+
+- Bàn thí nghiệm
+- Tủ lạnh
+- Tủ hóa chất
+- Biểu tượng phóng xạ
+- Giá đựng mẫu
+- Tủ bảo hộ
+- Thùng rác phóng xạ
+
+Tông màu:
+
+- Xanh nhạt
+- Trắng
+- Vàng cảnh báo
+
+===========================================================
+6. NHÂN VẬT
+===========================================================
+
+Một avatar sinh viên.
+
+Có 3 trạng thái.
+
+IDLE
+
+- đứng
+- thở
+- chớp mắt
+- vẫy tay
+
+SUCCESS
+
+- mặc blouse
+- mang giày
+- nhảy
+- giơ chữ V
+
+FAIL
+
+- nổ đen
+- tóc dựng
+- mắt xoáy
+- khói
+- mặt hoảng
+
+===========================================================
+7. LUỒNG GAME
+===========================================================
+
+START
+
+↓
+
+Hiện QR
+
+↓
+
+Học sinh kết nối
+
+↓
+
+Host Start
+
+↓
+
+Scene 1
+
+↓
+
+Vote
+
+↓
+
+Animation
+
+↓
+
+Scene 2
+
+↓
+
+Vote
+
+↓
+
+Animation
+
+↓
+
+Scene 3
+
+↓
+
+Vote
+
+↓
+
+Ending
+
+===========================================================
+8. MÀN HÌNH CHỜ
+===========================================================
+
+Hiển thị:
+
+============================
+
+PTN PHÓNG XẠ
+
+SINH TỒN KÝ
+
+Quét QR để tham gia
+
+[ QR CODE ]
+
+Đã kết nối:
+
+23 người
+
+============================
+
+===========================================================
+9. KỊCH BẢN
+===========================================================
+
+-------------------------
+SCENE 1
+-------------------------
+
+Background
+
+Cửa phòng thí nghiệm.
+
+Avatar:
+
+- cầm trà sữa
+- quần lửng
+- dép lê
+
+Text:
+
+"Bạn chuẩn bị bước vào PTN phóng xạ.
+Bạn sẽ làm gì?"
+
+Controller
+
+A
+
+Cứ đi vào.
+
+B
+
+Đổi trang phục đúng quy định.
+
+Nếu A thắng
+
+Animation FAIL
+
+Hiện:
+
+GAME OVER
+
+Bạn bị nhiễm xạ qua đường ăn uống
+và bị đuổi ngay từ vòng gửi xe.
+
+Hiện nút:
+
+Restart
+
+Nếu B thắng
+
+Animation SUCCESS
+
+Avatar đổi skin:
+
+- blouse
+- quần dài
+- giày kín
+
+Host bấm Next.
+
+-------------------------------------------------------
+
+SCENE 2
+
+Avatar
+
+Đã mặc blouse.
+
+Ngón tay có vết thương.
+
+Text
+
+"Giảng viên giao cho bạn
+một mẫu phóng xạ hở."
+
+Vote
+
+A
+
+Đeo găng rồi làm.
+
+B
+
+Báo giảng viên.
+
+Nếu A
+
+Animation FAIL
+
+Ngón tay phát sáng.
+
+Text
+
+HẬU QUẢ
+
+Chất phóng xạ
+ngấm qua vết thương.
+
+Bạn phải cấp cứu.
+
+Nếu B
+
+Animation SUCCESS
+
+Avatar gật đầu.
+
+Next.
+
+-------------------------------------------------------
+
+SCENE 3
+
+Avatar làm đổ dung dịch.
+
+Có animation chất lỏng tràn.
+
+Text
+
+"XOẢNG!
+
+Dung dịch bị đổ.
+
+Bạn làm gì đầu tiên?"
+
+Vote
+
+A
+
+Lau bằng khăn giấy.
+
+B
+
+Bỏ chạy.
+
+C
+
+Thông báo mọi người.
+
+Nếu A hoặc B
+
+Animation FAIL
+
+Text
+
+Bạn làm lan rộng
+ô nhiễm phóng xạ.
+
+GAME OVER
+
+Nếu C
+
+Animation SUCCESS
+
+Avatar cầm loa.
+
+Sau đó hiện:
+
+- giấy thấm chuyên dụng
+- thu gom
+- thùng rác phóng xạ
+
+Hiện chữ:
+
+CHÚC MỪNG
+
+BẠN ĐÃ SỐNG SÓT XUẤT SẮC
+
+===========================================================
+10. HỆ THỐNG BÌNH CHỌN
+===========================================================
+
+Mỗi điện thoại chỉ được vote 1 lần.
+
+Vote gửi realtime.
+
+Ví dụ:
+
+A
+
+32
+
+B
+
+46
+
+C
+
+12
+
+Hiển thị phần trăm:
+
+A 35%
+
+B 50%
+
+C 15%
+
+Sau 10 giây
+
+Tự khóa vote.
+
+Đáp án nhiều phiếu nhất thắng.
+
+===========================================================
+11. TIMER
+===========================================================
+
+Hiển thị
+
+10
+
+9
+
+8
+
+7
+
+6
+
+...
+
+0
+
+Hết giờ
+
+Vote tự khóa.
+
+===========================================================
+12. HIỆU ỨNG
+===========================================================
+
+Success
+
+- Confetti
+- Sparkle
+- Bounce
+- Glow
+
+Fail
+
+- Explosion
+- Smoke
+- Flash đỏ
+- Camera Shake
+
+Vote
+
+- Thanh tiến trình
+- Hiệu ứng tăng %
+
+===========================================================
+13. ÂM THANH
+===========================================================
+
+Success
+
+- Victory
+
+Fail
+
+- Explosion
+
+Vote
+
+- Tick
+
+Countdown
+
+- Beep
+
+Ending
+
+- Happy Ending Music
+
+===========================================================
+14. QR CODE
+===========================================================
+
+Trang chủ luôn hiển thị QR.
+
+Ví dụ
+
+https://domain.com/controller
+
+QR tự sinh.
+
+===========================================================
+15. CẤU TRÚC THƯ MỤC
+===========================================================
+
+PTN-Phong-Xa/
+
+│
+
+├── index.html
+├── display.html
+├── controller.html
+├── host.html
+
+│
+
+├── css/
+
+│      style.css
+│      display.css
+│      controller.css
+
+│
+
+├── js/
+
+│      app.js
+│      firebase.js
+│      display.js
+│      controller.js
+│      host.js
+
+│
+
+├── assets/
+
+│      backgrounds/
+│      characters/
+│      sounds/
+│      effects/
+
+│
+
+├── package.json
+
+└── README.md
+
+===========================================================
+16. TIÊU CHÍ HOÀN THÀNH
+===========================================================
+
+✓ Hỗ trợ tối thiểu 100 người chơi cùng lúc.
+
+✓ Đồng bộ realtime dưới 500ms.
+
+✓ Có 3 chế độ:
+- Display
+- Controller
+- Host
+
+✓ Có đồng hồ đếm ngược.
+
+✓ Có QR Code tự sinh.
+
+✓ Có hiệu ứng và âm thanh.
+
+✓ Có animation cho nhân vật.
+
+✓ Responsive trên điện thoại và máy tính.
+
+✓ Chạy trực tiếp trên GitHub Pages hoặc Vercel.
+
+===========================================================
+17. YÊU CẦU CHẤT LƯỢNG
+===========================================================
+
+- Giao diện hiện đại, sinh động, phong cách hoạt hình (Cartoon Flat Design), phù hợp học sinh THCS và THPT.
+- Animation mượt (60 FPS nếu có thể).
+- Màu sắc tươi sáng, dễ nhìn trên máy chiếu.
+- Hiệu ứng chuyển cảnh mượt.
+- Code được chia module rõ ràng, dễ mở rộng thêm câu hỏi hoặc kịch bản.
+- Không sử dụng thư viện nặng không cần thiết.
+- Tối ưu hiệu năng để nhiều thiết bị truy cập đồng thời.
+- Có chú thích (comment) đầy đủ trong mã nguồn.
+- Toàn bộ dự án phải sẵn sàng deploy lên GitHub Pages hoặc Vercel ngay sau khi hoàn thành.
